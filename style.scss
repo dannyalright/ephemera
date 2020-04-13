@@ -1,0 +1,40 @@
+// Setup
+body {
+  font-family: sans-serif;
+}
+
+header {
+  border-bottom: 3px solid lightgrey;
+
+  // filter area
+  div {
+    display: flex;
+
+    // children
+    div {
+      margin-right: 2rem;
+      
+      li span {
+        color: lightgrey;
+      }
+    }
+  }
+}
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+
+  article {
+    padding: 3vmax;
+  }
+}
+
+// Smarts
+.showItem {
+  display: auto; /* back to default (block? inline-block?) */
+}
+.hideItem {
+  display: none;
+}
+

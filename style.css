@@ -1,0 +1,35 @@
+body {
+  font-family: sans-serif;
+}
+
+header {
+  border-bottom: 3px solid lightgrey;
+}
+header div {
+  display: flex;
+}
+header div div {
+  margin-right: 2rem;
+}
+header div div li span {
+  color: lightgrey;
+}
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+}
+section article {
+  padding: 3vmax;
+}
+
+.showItem {
+  display: auto;
+  /* back to default (block? inline-block?) */
+}
+
+.hideItem {
+  display: none;
+}
+
+/*# sourceMappingURL=style.css.map */
