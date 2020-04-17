@@ -1,6 +1,7 @@
 import slugify from './slugify.js'
 
-export default function (items, parentElement) {
+export default function (items) {
+    const parentElement = document.querySelector("section");
 
     for (let i = 0; i < items.length; i++) {
         const myArticle = document.createElement("article");

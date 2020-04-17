@@ -3,7 +3,7 @@ export default
   [
     {
       "name": "Happy News",
-      "date": "2010-02-23 19:00:00 +1100",
+      "date": "2020-02-23 19:00:00 +1100",
       "location": "Wollstonecraft, NSW",
       "format": "jpg",
       "type": "analog",
@@ -11,7 +11,7 @@ export default
     },
     {
       "name": "Isle of Dogs",
-      "date": "2018-03-31 09:00:00 -0400",
+      "date": "2019-03-31 09:00:00 -0400",
       "location": "Kaufman 14, Astoria",
       "format": "jpg",
       "type": "digital",
