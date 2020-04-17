@@ -33,6 +33,7 @@ function showTags(object) {
     }
 }
 
+// TODO: make something similar to showTags for showTypes
 function showTypes(name) {
     alert(`Hello, ${name}!`)
 }
