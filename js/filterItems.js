@@ -10,14 +10,13 @@ export default function () {
     for (let i = 0; i < checkboxes.length; i++) {
         // Listen to clicks on checkboxes
         checkboxes[i].addEventListener("click", filterItems, false);
-        // Make sure browser starts with every checkbox selected
+        // Ensure browser starts with every checkbox pre-selected
         checkboxes[i].checked = true;
     }
 
     // Set up event handler referenced above
     function filterItems(e) {
         const clickedItem = e.target;
-        console.log(`${clickedItem} clicked!`)
 
         // TODO see if this below if statement could be replaced with a toggle thing
         // like https://alligator.io/js/classlist/#toggle
@@ -38,9 +37,15 @@ export default function () {
             // Access each item
             const currentItem = itemsToFilter[i];
 
-            // console.log(currentItem.attributes.value);
+            console.log(currentItem.getAttribute("data-tags"));
             // Check this item's value to see if it matches the value of the checkbox that was changed
             if (currentItem.getAttribute("data-type") == itemValue) {
+                currentItem.classList.remove(classToRemove);
+                currentItem.classList.add(classToAdd);
+            } else if (currentItem.getAttribute("data-year") == itemValue) {
+                currentItem.classList.remove(classToRemove);
+                currentItem.classList.add(classToAdd);
+            } else if (currentItem.getAttribute("data-country") == itemValue) {
                 currentItem.classList.remove(classToRemove);
                 currentItem.classList.add(classToAdd);
             }

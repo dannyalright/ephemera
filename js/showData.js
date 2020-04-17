@@ -27,6 +27,13 @@ export default function (items) {
         // Give each item a data attribute for year array
         myArticle.setAttribute("data-year", items[i].date.slice(0, 4));
 
+        // Go through each location in each ephemera item and split up by comma
+        const locationArray = items[i].location.split(",");
+        // Made a variable based on whatever is after the last comma (the country)
+        const country = locationArray[locationArray.length - 1];
+        // Give each item a data attribute for country array
+        myArticle.setAttribute("data-country", country);
+
         // Make each item list its tags
         const tags = items[i].tags;
         for (let j = 0; j < tags.length; j++) {
