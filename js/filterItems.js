@@ -17,6 +17,7 @@ export default function () {
     // Set up event handler referenced above
     function filterItems(e) {
         const clickedItem = e.target;
+        console.log(`${clickedItem} clicked!`)
 
         // TODO see if this below if statement could be replaced with a toggle thing
         // like https://alligator.io/js/classlist/#toggle

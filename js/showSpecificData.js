@@ -9,8 +9,6 @@ export default function (data, parserFunction, key, element) {
 
     const entries = Object.entries(specificDataAndItsCounts);
 
-    const tempKey = key;
-
     // Destructure(?) object in order to process the tag name and count separately
     for (const [key, count] of entries) {
         const specificDataListItem = document.createElement("li");

@@ -10,7 +10,7 @@ export default function (items) {
         const myImg = document.createElement("img");
         const myList = document.createElement("ul");
 
-        const date = new Date(items[i].date);
+        // const date = new Date(items[i].date);
 
         myH2.textContent = items[i].name;
         myPara1.textContent = items[i].location;
@@ -23,6 +23,9 @@ export default function (items) {
 
         // Give each item a data attribute for tags array
         myArticle.setAttribute("data-tags", items[i].tags);
+
+        // Give each item a data attribute for year array
+        myArticle.setAttribute("data-year", items[i].date.slice(0, 4));
 
         // Make each item list its tags
         const tags = items[i].tags;
