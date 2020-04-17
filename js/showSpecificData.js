@@ -15,8 +15,7 @@ export default function (data, parserFunction, key, element) {
         const specificDataListItemInput = document.createElement("input");
         specificDataListItemInput.type = "checkbox";
 
-        // TODO: why doesn't this 'checked' value render?
-        specificDataListItemInput.checked = true;
+        specificDataListItemInput.checked = false;
 
         specificDataListItemInput.id = key;
         specificDataListItemInput.value = key;

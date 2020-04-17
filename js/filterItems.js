@@ -7,27 +7,45 @@ export default function () {
     // Setup click event handlers on all checkboxes
     const checkboxes = document.querySelectorAll(".filterSection li input");
 
+    // Get results section ready
+    const resultsSection = document.getElementById("resultsSection");
+    const resultsCount = document.getElementById("resultsCount");
+    const resetButton = document.getElementById("resetButton");
+
+    // Make list of filters
+    const filterListArray = []
+
+    // Go through all checkboxes
     for (let i = 0; i < checkboxes.length; i++) {
         // Listen to clicks on checkboxes
         checkboxes[i].addEventListener("click", filterItems, false);
-        // Ensure browser starts with every checkbox pre-selected
-        checkboxes[i].checked = true;
+        // Ensure browser starts with every checkbox turned off
+        checkboxes[i].checked = false;
     }
 
     // Set up event handler referenced above
     function filterItems(e) {
         const clickedItem = e.target;
 
-        // TODO see if this below if statement could be replaced with a toggle thing
-        // like https://alligator.io/js/classlist/#toggle
-
+        // If going from unchecked to checked...
         if (clickedItem.checked == true) {
             hideOrShowItems(clickedItem.value, "hideItem", "showItem");
+            // Add item to filterListArray array
+            filterListArray.push(clickedItem.value);
+            // Add item to filter list
+            addToFilterList(clickedItem.value);
+            // If going from checked to unchecked...
         } else if (clickedItem.checked == false) {
             hideOrShowItems(clickedItem.value, "showItem", "hideItem");
-        } else {
-            // TODO: Deal with the interderminate state if needed?
+            // Remove item from filterListArray array
+            const index = filterListArray.indexOf(clickedItem.value);
+            filterListArray.splice(index, 1);
+            // Remove item from filter list
+            removeFromFilterList(clickedItem);
         }
+        // console.log(filterListArray.length);
+        hideOrShowResetButton(filterListArray, resetButton);
+        // TODO: return filters to user
     }
 
     // Show or hide our content based on class
@@ -37,7 +55,7 @@ export default function () {
             // Access each item
             const currentItem = itemsToFilter[i];
 
-            console.log(currentItem.getAttribute("data-tags"));
+            // console.log(currentItem.getAttribute("data-tags"));
             // Check this item's value to see if it matches the value of the checkbox that was changed
             if (currentItem.getAttribute("data-type") == itemValue) {
                 currentItem.classList.remove(classToRemove);
@@ -51,4 +69,37 @@ export default function () {
             }
         }
     }
+
+    // 
+    function addToFilterList(filterItem) {
+        const resultsStringToAdd = document.createElement("div");
+        resultsStringToAdd.textContent = filterItem;
+        resultsStringToAdd.setAttribute("data-value", filterItem);
+        resultsSection.appendChild(resultsStringToAdd);
+    }
+
+    function removeFromFilterList(filterItem) {
+        // console.log(resultsSection.childElementCount)
+
+        for (let i = 0; i < resultsSection.childElementCount; i++) {
+            const chip = resultsSection.children[i];
+            if (chip.getAttribute("data-value") == filterItem.value) {
+                chip.remove()
+            }
+        }
+    }
+
+    function hideOrShowResetButton(array, button) {
+        if (array.length < 1) {
+            // If there are no filters shown...
+            button.classList.remove("showItem");
+            button.classList.add("hideItem");
+        } else {
+            // If there is more than one filter shown...
+            button.classList.remove("hideItem");
+            button.classList.add("showItem");
+        }
+
+    }
+
 }
