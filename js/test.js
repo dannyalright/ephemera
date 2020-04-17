@@ -1,1 +1,0 @@
-export const testVar = "This is a test variable";
