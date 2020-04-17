@@ -23,7 +23,7 @@ export default
       "location": "Astoria",
       "format": "jpg",
       "type": "analog",
-      "tags": ["usa"]
+      "tags": ["usa", "art"]
     },
     {
       "name": "King Sauna",
@@ -39,7 +39,7 @@ export default
       "location": "Neptune Diner, Astoria",
       "format": "jpg",
       "type": "analog",
-      "tags": ["food"]
+      "tags": ["art", "food", "illustration"]
     },
     // {
     //   "name": "The Met",
