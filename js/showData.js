@@ -7,6 +7,7 @@ export default function (items) {
         const myArticle = document.createElement("article");
         const myH2 = document.createElement("h2");
         const myPara1 = document.createElement("p");
+        const myPara2 = document.createElement("p");
         const myImg = document.createElement("img");
         const myList = document.createElement("ul");
 
@@ -14,6 +15,7 @@ export default function (items) {
 
         myH2.textContent = items[i].name;
         myPara1.textContent = items[i].location;
+        myPara2.textContent = items[i].type;
         myImg.src = `https://ik.imagekit.io/dw/ephemera/${slugify(items[i].name)}.${
             items[i].format
             }?tr=w-200"`;
@@ -45,6 +47,7 @@ export default function (items) {
         // Render everything on the DOM
         myArticle.appendChild(myH2);
         myArticle.appendChild(myPara1);
+        myArticle.appendChild(myPara2);
         myArticle.appendChild(myImg);
         myArticle.appendChild(myList);
         parentElement.appendChild(myArticle);

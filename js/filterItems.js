@@ -1,4 +1,4 @@
-export default function () {
+export default function (data) {
     // https://www.kirupa.com/html5/filtering_items_in_a_list.htm
 
     // Gather all ephemera page elements
@@ -10,7 +10,7 @@ export default function () {
     // Get results section ready
     const resultsSection = document.getElementById("resultsSection");
     const resultsCount = document.getElementById("resultsCount");
-    const resetButton = document.getElementById("resetButton");
+    // const resetButton = document.getElementById("resetButton");
 
     // Make list of filters
     const filterListArray = []
@@ -44,8 +44,10 @@ export default function () {
             removeFromFilterList(clickedItem);
         }
         // console.log(filterListArray.length);
-        hideOrShowResetButton(filterListArray, resetButton);
+        // hideOrShowResetButton(filterListArray, resetButton);
         // TODO: return filters to user
+        // return filterListArray;
+        refreshData(data, filterListArray)
     }
 
     // Show or hide our content based on class
@@ -89,17 +91,40 @@ export default function () {
         }
     }
 
-    function hideOrShowResetButton(array, button) {
-        if (array.length < 1) {
-            // If there are no filters shown...
-            button.classList.remove("showItem");
-            button.classList.add("hideItem");
-        } else {
-            // If there is more than one filter shown...
-            button.classList.remove("hideItem");
-            button.classList.add("showItem");
-        }
+    // function hideOrShowResetButton(array, button) {
+    //     if (array.length < 1) {
+    //         // If there are no filters shown...
+    //         button.classList.remove("showItem");
+    //         button.classList.add("hideItem");
+    //     } else {
+    //         // If there is more than one filter shown...
+    //         button.classList.remove("hideItem");
+    //         button.classList.add("showItem");
+    //     }
 
+    // }
+
+    function refreshData(data, filters) {
+        if (filters.length > 0) {
+            console.log(`Show only data containing ${filters}`);
+            // console.log(data);
+        } else {
+            console.log(`Reset to showing everything—remove the hideItem class`);
+            resetAllData();
+
+        }
+    }
+
+    function resetAllData() {
+        // Go through list of ephemera page elements
+        for (let i = 0; i < itemsToFilter.length; i++) {
+            // Access each item
+            const currentItem = itemsToFilter[i];
+            // Reset its classes
+            currentItem.classList.remove("hideItem");
+            currentItem.classList.add("showItem");
+
+        }
     }
 
 }

@@ -28,7 +28,7 @@ showSpecificData(data, parseDataForCountries, "country", "countryFilterSection")
 // Every time I click on a checkbox...
 // Enter 'filtered' mode:
 // Handle filtering when checkboxes are changed
-filterItems();
+filterItems(data);
 // Show filtered 'chip' at top (with option to cancel filter)
 // Update count
 // Update rendered article array
