@@ -8,6 +8,7 @@ export default function (items) {
         const myH2 = document.createElement("h2");
         const myPara1 = document.createElement("p");
         const myPara2 = document.createElement("p");
+        const myPara3 = document.createElement("p");
         const myImg = document.createElement("img");
         const myList = document.createElement("ul");
 
@@ -28,6 +29,7 @@ export default function (items) {
 
         // Give each item a data attribute for year array
         myArticle.setAttribute("data-year", items[i].date.slice(0, 4));
+        myPara3.textContent = items[i].date.slice(0, 4);
 
         // Go through each location in each ephemera item and split up by comma
         const locationArray = items[i].location.split(",");
@@ -48,6 +50,7 @@ export default function (items) {
         myArticle.appendChild(myH2);
         myArticle.appendChild(myPara1);
         myArticle.appendChild(myPara2);
+        myArticle.appendChild(myPara3);
         myArticle.appendChild(myImg);
         myArticle.appendChild(myList);
         parentElement.appendChild(myArticle);

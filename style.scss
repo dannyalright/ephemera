@@ -38,3 +38,11 @@ section {
   display: none;
 }
 
+// Chips
+.chip {
+  background-color: black;
+  color: white;
+  border-radius: 2px;
+  padding: 0.5rem;
+  cursor: pointer;
+}

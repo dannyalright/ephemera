@@ -32,4 +32,12 @@ section article {
   display: none;
 }
 
+.chip {
+  background-color: black;
+  color: white;
+  border-radius: 2px;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=style.css.map */

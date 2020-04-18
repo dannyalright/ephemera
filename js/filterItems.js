@@ -2,7 +2,7 @@ export default function (data) {
     // https://www.kirupa.com/html5/filtering_items_in_a_list.htm
 
     // Gather all ephemera page elements
-    const itemsToFilter = document.querySelectorAll("#itemsToFilter article");
+    const pageItems = document.querySelectorAll("#itemsToFilter article");
 
     // Setup click event handlers on all checkboxes
     const checkboxes = document.querySelectorAll(".filterSection li input");
@@ -29,14 +29,14 @@ export default function (data) {
 
         // If going from unchecked to checked...
         if (clickedItem.checked == true) {
-            hideOrShowItems(clickedItem.value, "hideItem", "showItem");
+            // hideOrShowItems(clickedItem.value, "hideItem", "showItem");
             // Add item to filterListArray array
             filterListArray.push(clickedItem.value);
             // Add item to filter list
             addToFilterList(clickedItem.value);
             // If going from checked to unchecked...
         } else if (clickedItem.checked == false) {
-            hideOrShowItems(clickedItem.value, "showItem", "hideItem");
+            // hideOrShowItems(clickedItem.value, "showItem", "hideItem");
             // Remove item from filterListArray array
             const index = filterListArray.indexOf(clickedItem.value);
             filterListArray.splice(index, 1);
@@ -47,28 +47,28 @@ export default function (data) {
         // hideOrShowResetButton(filterListArray, resetButton);
         // TODO: return filters to user
         // return filterListArray;
-        refreshData(data, filterListArray)
+        refreshData(filterListArray)
     }
 
     // Show or hide our content based on class
     function hideOrShowItems(itemValue, classToRemove, classToAdd) {
         // Go through list of ephemera page elements
-        for (let i = 0; i < itemsToFilter.length; i++) {
+        for (let i = 0; i < pageItems.length; i++) {
             // Access each item
-            const currentItem = itemsToFilter[i];
+            const currentItem = pageItems[i];
 
             // console.log(currentItem.getAttribute("data-tags"));
             // Check this item's value to see if it matches the value of the checkbox that was changed
-            if (currentItem.getAttribute("data-type") == itemValue) {
-                currentItem.classList.remove(classToRemove);
-                currentItem.classList.add(classToAdd);
-            } else if (currentItem.getAttribute("data-year") == itemValue) {
-                currentItem.classList.remove(classToRemove);
-                currentItem.classList.add(classToAdd);
-            } else if (currentItem.getAttribute("data-country") == itemValue) {
-                currentItem.classList.remove(classToRemove);
-                currentItem.classList.add(classToAdd);
-            }
+            // if (currentItem.getAttribute("data-type") == itemValue) {
+            //     currentItem.classList.remove(classToRemove);
+            //     currentItem.classList.add(classToAdd);
+            // } else if (currentItem.getAttribute("data-year") == itemValue) {
+            //     currentItem.classList.remove(classToRemove);
+            //     currentItem.classList.add(classToAdd);
+            // } else if (currentItem.getAttribute("data-country") == itemValue) {
+            //     currentItem.classList.remove(classToRemove);
+            //     currentItem.classList.add(classToAdd);
+            // }
         }
     }
 
@@ -76,6 +76,7 @@ export default function (data) {
     function addToFilterList(filterItem) {
         const resultsStringToAdd = document.createElement("div");
         resultsStringToAdd.textContent = filterItem;
+        resultsStringToAdd.classList.add("chip");
         resultsStringToAdd.setAttribute("data-value", filterItem);
         resultsSection.appendChild(resultsStringToAdd);
     }
@@ -104,22 +105,91 @@ export default function (data) {
 
     // }
 
-    function refreshData(data, filters) {
-        if (filters.length > 0) {
-            console.log(`Show only data containing ${filters}`);
+    function refreshData(filterNames) {
+        if (filterNames.length > 0) {
+            console.log(filterNames);
+
+            // Go through list of ephemera page elements
+            for (let i = 0; i < pageItems.length; i++) {
+                // Access each item
+                const currentItem = pageItems[i];
+
+                // Manually deconstruct this item's dataset into one array
+                const currentItemBooleanData = []
+                currentItemBooleanData.push(currentItem.getAttribute("data-type"), currentItem.getAttribute("data-year"), currentItem.getAttribute("data-country"));
+                const currentItemTags = currentItem.getAttribute("data-tags").split(',');
+                const currentItemAllData = currentItemBooleanData.concat(currentItemTags);
+
+                // Check this item's dataset array if it contains any matches to the filtered names array
+                for (let j = 0; j < filterNames.length; j++) {
+                    // console.log(filterNames[j]);
+
+                    if (currentItemAllData.includes(filterNames[j])) {
+                        // This item's dataset array contains a match with the filtered names array
+                        // Show this item
+                        currentItem.classList.remove("hideItem");
+                        currentItem.classList.add("showItem");
+                    } else {
+                        // This item's dataset array does not contain a match with the filtered names array
+                        // Hide this item
+                        currentItem.classList.remove("showItem");
+                        currentItem.classList.add("hideItem");
+                    }
+                }
+
+            }
+
+
+
+
+            // const pageItemDataType = currentItem.dataset.type;
+            // const pageItemDataYear = currentItem.dataset.year;
+            // const pageItemDataCountry = currentItem.dataset.country;
+            // console.log(pageItemDataType);
+            // console.log(currentItem.getAttribute("data-type"));
+            // console.log(pageItemDataYear);
+            // console.log(pageItemDataCountry);
+
+            // if (currentItem.getAttribute("data-type") == pageItemDataType) {
+            //     currentItem.classList.remove("hideItem");
+            //     currentItem.classList.add("showItem");
+            // } else if (currentItem.getAttribute("data-year") == pageItemDataYear) {
+            //     currentItem.classList.remove("hideItem");
+            //     currentItem.classList.add("showItem");
+            // } else if (currentItem.getAttribute("data-country") == pageItemDataCountry) {
+            //     currentItem.classList.remove("hideItem");
+            //     currentItem.classList.add("showItem");
+            // }
+            // hideOrShowItems(itemValue, classToRemove, classToAdd)
+
+            // for (let j = 0; j < pageItems.length; j++) {
+            //     console.log(pageItems[j].dataset.type);
+            // }
+
+            // hideOrShowItems(filterNames[i], "hideItem", "showItem");
+            // }
+
             // console.log(data);
+            // const resetButton = document.createElement("button");
+            // resetButton.innerHTML = "Reset";
+            // resultsSection.appendChild(resetButton);
+            // resetButton.addEventListener ("click", function() {
+            //     alert("did something");
+            //   });
+
         } else {
             console.log(`Reset to showing everything—remove the hideItem class`);
             resetAllData();
-
+            // resetButton.remove();
         }
     }
 
     function resetAllData() {
         // Go through list of ephemera page elements
-        for (let i = 0; i < itemsToFilter.length; i++) {
+        for (let i = 0; i < pageItems.length; i++) {
+            console.log("Resetting all items...");
             // Access each item
-            const currentItem = itemsToFilter[i];
+            const currentItem = pageItems[i];
             // Reset its classes
             currentItem.classList.remove("hideItem");
             currentItem.classList.add("showItem");
