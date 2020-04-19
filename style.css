@@ -23,11 +23,6 @@ section article {
   padding: 3vmax;
 }
 
-.showItem {
-  display: auto;
-  /* back to default (block? inline-block?) */
-}
-
 .hideItem {
   display: none;
 }
